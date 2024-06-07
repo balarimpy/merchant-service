@@ -21,6 +21,9 @@ FROM eclipse-temurin:17-jdk-alpine
 # Create a directory to copy dependencies into
 RUN mkdir -p /app/dependencies
 
+# Create a directory to copy extracted files from the builder stage
+RUN mkdir -p /app/application
+
 # Copy dependencies from the builder stage
 COPY --from=builder /app/dependencies/ /app/dependencies/
 

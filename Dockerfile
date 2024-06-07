@@ -15,6 +15,9 @@ RUN for file in /app/*.jar; do \
         java -Djarmode=layertools -jar "$file" extract; \
     done
 
+# Print the contents of the dependencies directory for debugging
+RUN ls -la /app/dependencies/
+
 # Stage 2: Final stage
 FROM eclipse-temurin:17-jdk-alpine
 

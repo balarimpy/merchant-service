@@ -11,13 +11,20 @@ RUN mkdir -p /app
 COPY ${JAR_DIR}/*.jar /app/
 
 # Loop through each JAR file and extract layers
-RUN for file in /app/*.jar; do java -Djarmode=layertools -jar "$file" extract; done
+RUN for file in /app/*.jar; do \
+        java -Djarmode=layertools -jar "$file" extract; \
+    done
 
 # Stage 2: Final stage
 FROM eclipse-temurin:17-jdk-alpine
 
-# Copy dependencies, Spring Boot loader, and application files from the builder stage
+# Create a directory to copy dependencies into
+RUN mkdir -p /app/dependencies
+
+# Copy dependencies from the builder stage
 COPY --from=builder /app/dependencies/ /app/dependencies/
+
+# Copy Spring Boot loader and application files from the builder stage
 COPY --from=builder /app/spring-boot-loader/ /app/spring-boot-loader/
 COPY --from=builder /app/application/ /app/application/
 

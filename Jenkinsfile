@@ -23,7 +23,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'msp-deploy', credentialsId: 'github-app-msp', url: 'https://github.com/nziacbdc/merchant-service.git'
+                git branch: 'main', url: 'https://github.com/balarimpy/merchant-service.git'
             }
         }
 

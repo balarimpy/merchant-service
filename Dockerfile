@@ -15,17 +15,11 @@ RUN for file in /app/*.jar; do \
         java -Djarmode=layertools -jar "$file" extract; \
     done
 
-# Print the contents of the dependencies directory for debugging
-RUN ls -la /app/dependencies/
-
 # Stage 2: Final stage
 FROM eclipse-temurin:17-jdk-alpine
 
-# Create a directory to copy dependencies into
-RUN mkdir -p /app/dependencies
-
-# Create a directory to copy extracted files from the builder stage
-RUN mkdir -p /app/application
+# Create directories to copy dependencies and application files into
+RUN mkdir -p /app/dependencies /app/application
 
 # Copy dependencies from the builder stage
 COPY --from=builder /app/dependencies/ /app/dependencies/

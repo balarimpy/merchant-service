@@ -1,15 +1,11 @@
-# Build stage
 FROM eclipse-temurin:17-jdk-alpine as builder
-WORKDIR /app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:resolve
-COPY src ./src
-RUN ./mvnw package
+ARG JAR_FILE=build/libs/*.jar
 
-# Package stage
-FROM eclipse-temurin:17-jre-alpine
-WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
+COPY ${JAR_FILE} application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+
+FROM eclipse-temurin:17-jdk-alpine
+COPY --from=builder /tmp/dependencies/ ./dependencies/
+COPY --from=builder /tmp/spring-boot-loader/ ./spring-boot-loader/
+COPY --from=builder /tmp/application/ ./application/
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]

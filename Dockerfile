@@ -1,8 +1,8 @@
 FROM eclipse-temurin:17-jdk-alpine as builder
 ARG JAR_FILE=build/libs/*.jar
 
-COPY ${JAR_FILE} application.jar
-RUN java -Djarmode=layertools -jar application.jar extract
+COPY ${JAR_FILE} /app/
+RUN java -Djarmode=layertools -jar /app/*.jar extract
 
 FROM eclipse-temurin:17-jdk-alpine
 COPY --from=builder /tmp/dependencies/ ./dependencies/

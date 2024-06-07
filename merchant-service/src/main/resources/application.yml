@@ -1,0 +1,59 @@
+server:
+  port: ${SERVER_PORT:4006}
+
+logging:
+  level:
+    root: INFO
+    io.movmint.msp.merchant.service: TRACE
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} requestId=[%X{requestId}] %logger{36} - %msg%n"
+
+spring:
+  application:
+    name: merchant-service
+  config:
+    import: optional:file:.env[.properties]
+
+  # MongoDB connection properties
+  data:
+    mongodb:
+      authentication-database: admin
+      host: ${MERCHANT_DB_HOST:localhost}
+      port: ${MERCHANT_DB_MASTER_PORT:27017}
+      database: ${MERCHANT_DATABASE_NAME:MERCHANT_DB}
+      username: ${MERCHANT_DB_SUPER_USERNAME:NZIA_MERCHANT_USER}
+      password: ${MERCHANT_DB_SUPER_PASSWORD:NZIA_MERCHANT_PASS}
+  liquibase:
+#    change-log file can be a .yaml .json .xml
+    change-log: changelog/changelog.yaml
+    driver-class-name: liquibase.ext.mongodb.database.MongoClientDriver
+    show-summary-output: log
+#   disable if no need to run liquibase allways
+    enabled: false
+
+  kafka:
+    bootstrap-servers: localhost:9192, localhost:9292, localhost:9392
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+virtual-wallet-service:
+  domain: ${VWS_DOMAIN:http://localhost:4007}
+  url:
+    get:
+      assigned-wallets: /virtual-wallet
+      all-virtual-wallets: /virtual-wallet/all
+    post:
+      virtual-wallet-patch: /virtual-wallet/batch
+      virtual-wallet-link: /virtual-wallet/link
+
+notification-service:
+  domain: ${NOTIFICATION_DOMAIN:http://localhost:4008}
+  url:
+    post:
+      email-conformation: /mail/user-confirmation

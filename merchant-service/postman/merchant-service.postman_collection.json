@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "37ffe285-19de-43f8-a63d-1130ff73b433",
+		"name": "merchant-service",
+		"description": "Merchant Service API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30131597"
+	},
+	"item": [
+		{
+			"name": "Business",
+			"item": [
+				{
+					"name": "Create Business",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"type\": \"SIMPLE\",\r\n    \"status\": \"OFFBOARDED\",\r\n    \"wspId\": \"3d6b5d5d-6f38-44e6-bedf-d225df029f9b\",\r\n    \"account\": {\r\n        \"accountNo\": \"{{$randomFirstName}}\",\r\n        \"accountName\": \"{{$randomFirstName}}\",\r\n        \"customName\": \"{{$randomFirstName}}\",\r\n        \"agentId\": \"1406d491-ea88-42ac-8b21-00b07a603627\",\r\n        \"metadata\": {\r\n            \"district\": \"Exuma\",\r\n            \"industry\": \"F&B\"\r\n        },\r\n        \"walletLimit\": \"LITE\",\r\n        \"walletLimitId\": null\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{merchant_url}}/business"
+					},
+					"response": [
+						{
+							"name": "Successful business creation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"type\": \"SIMPLE\",\r\n    \"status\": \"OFFBOARDED\",\r\n    \"wspId\": \"3d6b5d5d-6f38-44e6-bedf-d225df029f9b\",\r\n    \"account\": {\r\n        \"accountNo\": \"{{$randomFirstName}}\",\r\n        \"accountName\": \"{{$randomFirstName}}\",\r\n        \"customName\": \"{{$randomFirstName}}\",\r\n        \"agentId\": \"1406d491-ea88-42ac-8b21-00b07a603627\",\r\n        \"metadata\": {\r\n            \"district\": \"Exuma\",\r\n            \"industry\": \"F&B\"\r\n        },\r\n        \"walletLimit\": \"LITE\",\r\n        \"walletLimitId\": null\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:4006/business"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 03 May 2024 10:13:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"6634b8cbc3eb240f462fa407\",\n    \"name\": \"Movmint Digital Fiat Works Corporation\",\n    \"type\": \"SIMPLE\",\n    \"status\": \"OFFBOARDED\",\n    \"wspId\": \"3d6b5d5d-6f38-44e6-bedf-d225df029f9b\"\n}"
+						},
+						{
+							"name": "MVC-0003 - request invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"type\": \"SIMPLE\",\r\n    \"status\": \"OFFBOARDED\",\r\n    \"wspId\": \"3d6b5d5d-6f38-44e6-bedf-d225df029f9b\",\r\n    \"account\": {\r\n        \"accountNo\": \"{{$randomFirstName}}\",\r\n        \"accountName\": \"{{$randomFirstName}}\",\r\n        \"customName\": \"{{$randomFirstName}}\",\r\n        \"agentId\": \"1406d491-ea88-42ac-8b21-00b07a603627\",\r\n        \"metadata\": {\r\n            \"district\": \"Exuma\",\r\n            \"industry\": \"F&B\"\r\n        },\r\n        \"walletLimit\": \"LITE\",\r\n        \"walletLimitId\": null\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{merchant_url}}/business"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 07 May 2024 10:48:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"MVC-0003\",\n    \"description\": \"request invalid, could not be completed\",\n    \"details\": {\n        \"additionalInfo\": {\n            \"name\": \"Name is required\"\n        },\n        \"message\": \"request invalid, could not be completed\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"movmint user\",\r\n    \"phone\": \"100245768\",\r\n    \"email\": \"testuser@movmint.com\",\r\n    \"password\": \"password\",\r\n    \"role\" : \"MANAGER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{merchant_url}}/user"
+					},
+					"response": [
+						{
+							"name": "Successful user creation",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"movmint user\",\r\n    \"phone\": \"100245768\",\r\n    \"email\": \"testuser@movmint.com\",\r\n    \"password\": \"password\",\r\n    \"role\" : \"MANAGER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{merchant_url}}/user"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2024 10:42:49 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"663b57294400372b460dfb20\",\n    \"name\": \"movmint user\",\n    \"phone\": \"100245768\",\n    \"email\": \"testuser@movmint.com\",\n    \"status\": \"DEACTIVE\",\n    \"role\": \"MANAGER\",\n    \"emailConfirmed\": false\n}"
+						},
+						{
+							"name": "MVC-0007-Duplicate entry",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"movmint user\",\r\n    \"phone\": \"100245768\",\r\n    \"email\": \"testuser@movmint.com\",\r\n    \"password\": \"password\",\r\n    \"role\" : \"MANAGER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{merchant_url}}/user"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2024 10:44:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"MVC-0007\",\n    \"description\": \"duplicate record detected\",\n    \"details\": {\n        \"message\": \"duplicate email. Please try again.\"\n    }\n}"
+						},
+						{
+							"name": "MVC-0003-request invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\",\r\n    \"phone\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"role\" : null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{merchant_url}}/user"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 08 May 2024 10:46:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"MVC-0003\",\n    \"description\": \"request invalid, could not be completed\",\n    \"details\": {\n        \"additionalInfo\": {\n            \"password\": \"password is required\",\n            \"role\": \"role is required\",\n            \"phone\": \"phone is required\",\n            \"name\": \"Name is required\",\n            \"email\": \"email is required\"\n        },\n        \"message\": \"request invalid, could not be completed\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "all-virtual-wallet",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userid",
+								"value": "663b4b192260bb2b7842b239",
+								"type": "text"
+							}
+						],
+						"url": "{{merchant_url}}/user/all/virtual-wallet"
+					},
+					"response": [
+						{
+							"name": "MVC-0008- external server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "userid",
+										"value": "663b4b192260bb2b7842b239",
+										"type": "text"
+									}
+								],
+								"url": "{{merchant_url}}/user/all/virtual-wallet"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 10:41:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"MVC-0008\",\n    \"description\": \"Failed to communicate with external service\",\n    \"details\": {\n        \"message\": \"Failed to communicate with external service. Please retry or contact support.\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "own virtual-wallets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "userid",
+								"value": "663b4b192260bb2b7842b239",
+								"type": "text"
+							}
+						],
+						"url": "{{merchant_url}}/user/virtual-wallet"
+					},
+					"response": [
+						{
+							"name": "MVC-0008- external server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "userid",
+										"value": "663b4b192260bb2b7842b239",
+										"type": "text"
+									}
+								],
+								"url": "{{merchant_url}}/user/virtual-wallet"
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 May 2024 10:41:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"MVC-0008\",\n    \"description\": \"Failed to communicate with external service\",\n    \"details\": {\n        \"message\": \"Failed to communicate with external service. Please retry or contact support.\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

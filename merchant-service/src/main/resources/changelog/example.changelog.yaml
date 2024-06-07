@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_example_change_log_yaml
+      author: john
+      changes:
+        - createCollection:
+            collectionName: test_table
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

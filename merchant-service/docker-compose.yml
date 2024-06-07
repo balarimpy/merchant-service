@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+
+  # Mongo Databases
+  merchant-db:
+    image: mongodb/mongodb-community-server
+    container_name: merchant-db
+    hostname: mongo
+    restart: unless-stopped
+    ports:
+      - '${MERCHANT_DB_MASTER_PORT}:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MERCHANT_DB_SUPER_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MERCHANT_DB_SUPER_PASSWORD
+      - MONGO_INITDB_DATABASE=$MERCHANT_DATABASE_NAME
+    volumes:
+      - /data/db/
+      - /var/log/mongodb/
+      - /docker-entrypoint-initdb.d/
+
+volumes:
+  merchant-db-data:
